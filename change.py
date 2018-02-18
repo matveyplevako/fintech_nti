@@ -13,9 +13,11 @@ def oneperevod(x):
         return x, 'finney'
     if len(x) >= 19:
         return x, 'eth'
-x = str(1000000001)
+x = str(2)
 this = oneperevod(x)
 def perevod(this):
+    if this[1] == 'wei':
+        return this
     if this[1] == 'kwei':
         return this[0][:-3] + ','+ this[0][-3:] , 'kwei'
     if this[1] == 'mwei':
