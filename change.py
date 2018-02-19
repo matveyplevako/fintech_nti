@@ -13,7 +13,7 @@ def oneperevod(x):
         return x, 'finney'
     if len(x) >= 19:
         return x, 'eth'
-x = str(2)
+x = str(200000600)
 this = oneperevod(x)
 def perevod(this):
     if this[1] == 'wei':
@@ -30,7 +30,20 @@ def perevod(this):
         return this[0][:-15] + ','+ this[0][-15:] , 'finney'
     if this[1] == 'eth':
         return this[0][:-18] + ','+ this[0][-18:] , 'eth'
-print(perevod(this))
+otv = perevod(this)
+k = otv[0]
+p = ''
+m = 0
+for i in range (len(k)):
+    if k[i] == ',':
+        m = 1
+if m == 1:
+    while k[-1] == '0':
+        p = k
+        k = ""
+        k = p[:-1]
+        p = ''
+print(k, otv[1])
 
 
 
