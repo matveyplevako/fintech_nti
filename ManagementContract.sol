@@ -29,8 +29,7 @@ contract ManagemetContract is Ownable {
     
     function regMerch(string name) public {
         require(keccak256(MerchName[msg.sender]) == keccak256("") &&
-        keccak256(name) != keccak256("") &&
-        MerchId[keccak256(name)] == 0);
+        keccak256(name) != keccak256("") && MerchId[keccak256(name)] == 0);
         MerchCount = MerchCount.add(1);
         MerchId[keccak256(name)] = MerchCount;
         MerchAddress[MerchCount] = msg.sender;

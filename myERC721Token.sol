@@ -39,7 +39,9 @@ contract Token is Ownable {
     }
     
     function transfer(string _MerchName, uint _tokenId) public onlyOwnerOf(_tokenId) {
+        require(keccak256(Assets[_tokenId].status) == keccak256("in operation"));
         uint MerchId = Manager.MerchId(keccak256(_MerchName));
+        require(MerchId != 0);
         _transfer(Manager.MerchAddress(MerchId), _tokenId);
     }
     
@@ -53,13 +55,6 @@ contract Token is Ownable {
         Assets[_tokenId].prop = prop;
     }
     
-    // function getProperty(uint256 _tokenId) public view returns(string[3]) {
-        // string storage prop = Assets[_tokenId].prop;
-        // string name = Manager.MerchName(tokenOwner[_tokenId]);
-        // string storage status = Assets[_tokenId].status;
-        // return [name, prop, status];
-    // }
-    
     function _mint(uint _tokenId) internal {
         emit AssetCreated(_tokenId);
         Assets[_tokenId] = Asset(symbols, "in operation");
@@ -68,15 +63,6 @@ contract Token is Ownable {
     
     function _transfer(address _to, uint _tokenId) internal {
         tokenOwner[_tokenId] = _to;
-    }
-    
-    function destroy(uint _tokenId) public {
-        require(msg.sender == tokenOwner[_tokenId] || msg.sender == Ownable.owner);
-        if (tokenOwner[_tokenId] == msg.sender) {
-            requestBurning(_tokenId);
-        } else if (Ownable.owner == msg.sender) {
-            burn(true, _tokenId);
-        }
     }
     
     function requestBurning(uint _tokenId) public onlyOwnerOf(_tokenId) {
