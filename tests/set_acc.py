@@ -8,4 +8,4 @@ w3 = Web3(Web3.HTTPProvider("http://localhost:8545"))
 with open('account_id', 'w') as id:
     id.write(argv[1])
 
-print("set to " + argv[1], 'balanace ' + str(w3.eth.gethBalance(w3.eth.accounts[int(argv[1])]) / (10 ** 18)) + ' ether')
+print("set to " + argv[1], 'balanace ' + str(w3.eth.getBalance(w3.eth.accounts[int(argv[1])]) / (10 ** 18)) + ' ether')
