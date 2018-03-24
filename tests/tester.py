@@ -1,3 +1,11 @@
+'''
+
+git add tester.py
+git commit -m "tests for identity.py"
+git push
+
+'''
+
 from web3 import Web3
 
 w3 = Web3(Web3.HTTPProvider("http://localhost:8545"))
@@ -10,18 +18,25 @@ new_accounts = 'new_accounts.py '
 from subprocess import check_output
 from shlex import split
 
+
 def switch(id):
     execute(switch_acc + str(id))
 
+
 def newAccounts(num):
     execute(new_accounts + str(num))
+
 
 def execute(comand):
     print("******")
     print("******")
     return check_output(['python3'] + split(comand)).rstrip(b'\n').decode('utf-8')
 
-def check(comand, result):
-    response = execute(comand)
-    assert response == result
 
+if len(w3.eth.accounts) == 1:
+    newAccounts(6)
+
+file = 'identity.py'
+
+print('test1')
+execute(file + " --deploy ")
