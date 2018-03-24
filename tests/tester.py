@@ -1,8 +1,8 @@
 '''
 
 git add tester.py
-git commit -m "tests for identity.py"
-git push
+git commit -m ""
+git push origin master
 
 '''
 
@@ -19,7 +19,7 @@ from subprocess import check_output
 from shlex import split
 
 
-def switch(id):
+def set_acc(id):
     execute(switch_acc + str(id))
 
 
@@ -30,13 +30,75 @@ def newAccounts(num):
 def execute(comand):
     print("******")
     print("******")
-    return check_output(['python3'] + split(comand)).rstrip(b'\n').decode('utf-8')
+    try:
+        response = check_output(['python3'] + split(comand)).rstrip(b'\n').decode('utf-8')
+        print(response)
+        return True
+    except:
+        return False
+
+
+failed_tests = []
 
 
 if len(w3.eth.accounts) == 1:
     newAccounts(6)
 
 file = 'identity.py'
+set_acc(0)
 
 print('test1')
-execute(file + " --deploy ")
+if not execute(file + " --deploy "):
+    failed_tests.append('test1')
+
+print('test2')
+if not execute(file + " --setfee 1 "):
+    failed_tests.append('test2')
+
+set_acc(1)
+print('test3')
+if execute(file + " --setfee 1 "):
+    failed_tests.append('test3')
+
+
+print('test4')
+set_acc(2)
+if not execute(file + " --getfee "):
+    failed_tests.append('test4')
+
+
+print('test5')
+set_acc(1)
+if not execute(file + " --vendreg comp CMP 2 "):
+    failed_tests.append('test5')
+
+
+print('test6')
+set_acc(2)
+if  execute(file + " --vendreg comp CMP 1 "):
+    failed_tests.append('test6')
+
+print('test7')
+set_acc(1)
+if not execute(file + " --vendreg compa CNN 1.5 "):
+    failed_tests.append('test7')
+
+print('test8')
+print('test9')
+
+print('test10')
+set_acc(1)
+if not execute(file + " --create 4 "):
+    failed_tests.append('test10')
+
+print('test12')
+set_acc(1)
+if not execute(file + " --setprop Omega 3 "):
+    failed_tests.append('test12')
+
+print(failed_tests)
+
+
+
+
+
