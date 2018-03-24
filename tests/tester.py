@@ -75,7 +75,7 @@ if not execute(file + " --vendreg comp CMP 2 "):
 
 print('test6')
 set_acc(2)
-if  execute(file + " --vendreg comp CMP 1 "):
+if execute(file + " --vendreg comp CMP 1 "):
     failed_tests.append('test6')
 
 print('test7')
@@ -84,6 +84,7 @@ if not execute(file + " --vendreg compa CNN 1.5 "):
     failed_tests.append('test7')
 
 print('test8')
+
 print('test9')
 
 print('test10')
@@ -91,10 +92,60 @@ set_acc(1)
 if not execute(file + " --create 4 "):
     failed_tests.append('test10')
 
+print('test11')
+
 print('test12')
 set_acc(1)
-if not execute(file + " --setprop Omega 3 "):
+if not execute(file + " --setprop " + "Omega 3 "):
     failed_tests.append('test12')
+
+
+print('test13')
+set_acc(3)
+if execute(file + " --setprop " + "Okjkgmega 5 "):
+    failed_tests.append('test13')
+
+
+print('test14')
+set_acc(1)
+if not execute(file + " --merchreg " + " RF,Tatarstan,Kazan,GGG "):
+    failed_tests.append('test14')
+
+
+print('test15')
+set_acc(1)
+if not execute(file + " --owner " + " RF,Tatarstan,Kazan,GGG " + " 3 "):
+    failed_tests.append('test15')
+
+
+print('test16')
+set_acc(3)
+if not execute(file + " --data " + " 3 "):
+    failed_tests.append('test16')
+
+
+print('test17')
+set_acc(1)
+if not execute(file + " --destroy " + " 3 "):
+    failed_tests.append('test17')
+
+
+print('test18')
+set_acc(1)
+if not execute(file + " --destroy " + " 3 "):
+    failed_tests.append('test18')
+
+print('test19')
+
+print('test20')
+set_acc(1)
+if not execute(file + " --destroy " + " 3 "):
+    failed_tests.append('test20')
+
+print('test21')
+# I don't know how to do this item
+
+
 
 print(failed_tests)
 
